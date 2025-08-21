@@ -1,5 +1,7 @@
 # NexaFlow - Workflow Automation Platform
 
+🌐 **Live Demo**: [https://mutlukurt.github.io/nexaflow/](https://mutlukurt.github.io/nexaflow/)
+
 NexaFlow is a modern, responsive landing page for a workflow automation platform designed to help teams streamline their processes and boost productivity.
 
 ## 🚀 Features
