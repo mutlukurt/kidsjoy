@@ -1,0 +1,134 @@
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #f9fafb;
+    --dark: #1f2937;
+    --light: #f9fafb;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+.hero-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.pricing-card:hover {
+    transform: scale(1.03);
+}
+
+.recommended {
+    border: 2px solid var(--primary);
+    transform: scale(1.05);
+}
+
+.recommended:hover {
+    transform: scale(1.08);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-content.open {
+    max-height: 500px;
+}
+
+.dark-mode {
+    background-color: #111827;
+    color: #f9fafb;
+}
+
+.dark-mode .bg-light {
+    background-color: #1f2937;
+}
+
+.dark-mode .text-dark {
+    color: #f9fafb;
+}
+
+.dark-mode .bg-secondary {
+    background-color: #374151;
+}
+
+.testimonial-slide {
+    transition: transform 0.5s ease-in-out;
+}
+
+.step-active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.step-inactive {
+    background-color: #e5e7eb;
+    color: #6b7280;
+}
+
+.dark-mode .step-inactive {
+    background-color: #374151;
+    color: #9ca3af;
+}
+
+/* Pricing toggle styles */
+#pricing-toggle:checked + label span {
+    transform: translateX(24px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-bg h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-bg p {
+        font-size: 1.125rem;
+    }
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, .feature-card, .pricing-card {
+    transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+button:focus, a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
