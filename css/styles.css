@@ -87,14 +87,124 @@ body {
     transform: translateX(24px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Mobile-First Responsive Design */
+
+/* Base mobile styles (320px and up) */
+@media (min-width: 320px) {
+    /* Typography scaling for mobile */
+    .hero-bg h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-bg p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    /* Mobile navigation */
+    #mobile-menu {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+    }
+    
+    #mobile-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    /* Mobile button optimizations */
+    button {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Mobile spacing */
+    .py-16 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    
+    .mb-12 {
+        margin-bottom: 2rem;
+    }
+    
+    .gap-6 {
+        gap: 1rem;
+    }
+}
+
+/* Small mobile devices (375px and up) */
+@media (min-width: 375px) {
+    .hero-bg h1 {
+        font-size: 2.25rem;
+    }
+    
+    .hero-bg p {
+        font-size: 1.125rem;
+    }
+}
+
+/* Medium mobile devices (480px and up) */
+@media (min-width: 480px) {
     .hero-bg h1 {
         font-size: 2.5rem;
     }
     
     .hero-bg p {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
+    }
+}
+
+/* Large mobile devices (768px and up) */
+@media (min-width: 768px) {
+    .hero-bg h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero-bg p {
+        font-size: 1.5rem;
+    }
+    
+    /* Reset mobile-specific styles */
+    .py-16 {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+    
+    .mb-12 {
+        margin-bottom: 3rem;
+    }
+    
+    .gap-6 {
+        gap: 1.5rem;
+    }
+}
+
+/* Tablet devices (1024px and up) */
+@media (min-width: 1024px) {
+    .hero-bg h1 {
+        font-size: 4.5rem;
+    }
+    
+    .hero-bg p {
+        font-size: 1.75rem;
+    }
+}
+
+/* Desktop devices (1280px and up) */
+@media (min-width: 1280px) {
+    .hero-bg h1 {
+        font-size: 5rem;
+    }
+    
+    .hero-bg p {
+        font-size: 2rem;
     }
 }
 
@@ -107,6 +217,84 @@ button, a, .feature-card, .pricing-card {
 button:focus, a:focus {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
+}
+
+/* Mobile-specific enhancements */
+@media (max-width: 768px) {
+    /* Mobile navigation enhancements */
+    #mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Mobile card optimizations */
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Mobile testimonial optimizations */
+    .testimonial-slide {
+        padding: 0 1rem;
+    }
+    
+    /* Mobile pricing optimizations */
+    .pricing-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Mobile FAQ optimizations */
+    .accordion-header {
+        padding: 1rem;
+    }
+    
+    /* Mobile button touch targets */
+    .btn-primary, .btn-secondary {
+        min-height: 48px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    /* Mobile spacing adjustments */
+    .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .py-16 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    
+    /* Mobile grid adjustments */
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    
+    /* Mobile image optimizations */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects on touch devices */
+    .feature-card:hover,
+    .pricing-card:hover {
+        transform: none;
+    }
+    
+    /* Add active states for touch */
+    .feature-card:active,
+    .pricing-card:active {
+        transform: scale(0.98);
+    }
+    
+    /* Touch-friendly button states */
+    button:active {
+        transform: scale(0.95);
+    }
 }
 
 /* Loading states */
@@ -131,4 +319,157 @@ button:focus, a:focus {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-dark);
+}
+
+/* Mobile-specific utility classes */
+.mobile-only {
+    display: block;
+}
+
+.desktop-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none;
+    }
+    
+    .desktop-only {
+        display: block;
+    }
+}
+
+/* Mobile navigation overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 30;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile button states */
+.btn-mobile-primary {
+    @apply w-full bg-indigo-600 text-white px-6 py-4 rounded-lg font-semibold text-base;
+    min-height: 48px;
+    touch-action: manipulation;
+}
+
+.btn-mobile-secondary {
+    @apply w-full bg-transparent border-2 border-white text-white px-6 py-4 rounded-lg font-semibold text-base;
+    min-height: 48px;
+    touch-action: manipulation;
+}
+
+/* Mobile card optimizations */
+.mobile-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6;
+    margin-bottom: 1rem;
+}
+
+/* Mobile spacing utilities */
+.mobile-px {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.mobile-py {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .mobile-px {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    .mobile-py {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+/* Mobile touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Optimize for touch devices */
+    .feature-card,
+    .pricing-card,
+    .testimonial-slide {
+        cursor: pointer;
+    }
+    
+    /* Remove hover effects on touch */
+    .feature-card:hover,
+    .pricing-card:hover {
+        transform: none;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Add active states for touch feedback */
+    .feature-card:active,
+    .pricing-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+    /* Reduce animations on mobile for better performance */
+    .feature-card,
+    .pricing-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    /* Optimize mobile scrolling */
+    .hero-bg,
+    section {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Mobile button optimizations */
+    button {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Mobile image optimizations */
+    img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+    }
+}
+
+/* Mobile landscape optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-bg {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    .py-16 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    .mb-12 {
+        margin-bottom: 1.5rem;
+    }
 }

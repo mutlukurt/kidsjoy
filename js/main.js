@@ -120,13 +120,45 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Mobile menu toggle (for future mobile navigation)
+// Mobile Navigation Functionality
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuIcon = mobileMenuToggle.querySelector('i');
+
+// Toggle mobile menu
 function toggleMobileMenu() {
-    const mobileMenu = document.querySelector('.mobile-menu');
-    if (mobileMenu) {
-        mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('open');
+    
+    // Change icon based on menu state
+    if (mobileMenu.classList.contains('open')) {
+        mobileMenuIcon.classList.remove('fa-bars');
+        mobileMenuIcon.classList.add('fa-times');
+    } else {
+        mobileMenuIcon.classList.remove('fa-times');
+        mobileMenuIcon.classList.add('fa-bars');
     }
 }
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        mobileMenuIcon.classList.remove('fa-times');
+        mobileMenuIcon.classList.add('fa-bars');
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        mobileMenuIcon.classList.remove('fa-times');
+        mobileMenuIcon.classList.add('fa-bars');
+    }
+});
+
+// Add event listener to mobile menu toggle
+mobileMenuToggle.addEventListener('click', toggleMobileMenu);
 
 // Form validation (for future contact forms)
 function validateForm(formData) {
@@ -160,9 +192,73 @@ function lazyLoadImages() {
     images.forEach(img => imageObserver.observe(img));
 }
 
-// Initialize lazy loading when DOM is loaded
+// Mobile performance optimizations
+function optimizeForMobile() {
+    // Reduce AOS animations on mobile for better performance
+    if (window.innerWidth <= 768) {
+        AOS.init({
+            duration: 600,
+            once: true,
+            disable: 'mobile'
+        });
+    }
+    
+    // Optimize scroll performance on mobile
+    let ticking = false;
+    function updateNavbar() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-white', 'shadow-lg');
+            navbar.classList.remove('bg-transparent');
+        } else {
+            navbar.classList.remove('bg-white', 'shadow-lg');
+            navbar.classList.add('bg-transparent');
+        }
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
+    }
+    
+    // Use passive scroll listener for better mobile performance
+    window.addEventListener('scroll', requestTick, { passive: true });
+}
+
+// Touch gesture support for mobile
+function addTouchSupport() {
+    let startX = 0;
+    let startY = 0;
+    
+    // Swipe to close mobile menu
+    mobileMenu.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    mobileMenu.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Swipe left to close menu
+        if (diffX > 50 && Math.abs(diffY) < 50) {
+            mobileMenu.classList.remove('open');
+            mobileMenuIcon.classList.remove('fa-times');
+            mobileMenuIcon.classList.add('fa-bars');
+        }
+    });
+}
+
+// Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     lazyLoadImages();
+    optimizeForMobile();
+    addTouchSupport();
 });
 
 // Error handling for external resources
